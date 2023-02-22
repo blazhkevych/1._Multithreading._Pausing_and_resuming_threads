@@ -22,53 +22,57 @@
         </Grid.ColumnDefinitions>
 
         <!--1-й ProgressBar-->
-        <ProgressBar Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                     Value="75" Margin="5" />
+        <ProgressBar x:Name="ProgressBar1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     Value="0" Margin="5" />
 
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="5,5,5,5"
                     HorizontalAlignment="Left" VerticalAlignment="Center">
-            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
-            <Label Content="Остановить 1-й поток." Margin="5,5,5,5" />
+            <CheckBox x:Name="StartCheckBox1" Click="StartCheckBox_Click1" VerticalAlignment="Center" Margin="5,5,5,5" />
+            <Label x:Name="StartLabel1" Content="Запустить 1-й поток." Margin="5,5,5,5" />
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5"
+        <StackPanel x:Name="StackPanelStop1" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5"
+                    IsEnabled="False"
                     HorizontalAlignment="Left" VerticalAlignment="Center">
-            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
-            <Label Content="Возобновить 1-й поток." Margin="5,5,5,5" />
+            <CheckBox x:Name="CheckBoxStop1" VerticalAlignment="Center" Margin="5,5,5,5" />
+            <Label x:Name="LabelStop1" Content="Приостановить 1-й поток." Margin="5,5,5,5" />
         </StackPanel>
 
         <!--2-й ProgressBar-->
-        <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Stretch"
+        <ProgressBar x:Name="ProgressBar2" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0"
+                     HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
-                     Value="75" Margin="5" />
+                     Value="0" Margin="5" />
 
         <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="5,5,5,5"
                     HorizontalAlignment="Left" VerticalAlignment="Center">
             <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
-            <Label Content="Остановить 2-й поток." Margin="5,5,5,5" />
+            <Label Content="Запустить 2-й поток." Margin="5,5,5,5" />
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5"
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5" IsEnabled="False"
                     HorizontalAlignment="Left" VerticalAlignment="Center">
             <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
-            <Label Content="Возобновить 2-й поток." Margin="5,5,5,5" />
+            <Label Content="Приостановить 2-й поток." Margin="5,5,5,5" />
         </StackPanel>
 
         <!--3-й ProgressBar-->
-        <ProgressBar Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Stretch"
+        <ProgressBar x:Name="ProgressBar3" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0"
+                     HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
-                     Value="75" Margin="5" />
+                     Value="0" Margin="5" />
 
         <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Margin="5,5,5,5"
                     HorizontalAlignment="Left" VerticalAlignment="Center">
             <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
-            <Label Content="Остановить 3-й поток." Margin="5,5,5,5" />
+            <Label Content="Запустить 3-й поток." Margin="5,5,5,5" />
         </StackPanel>
 
-        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5"
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5" IsEnabled="False"
                     HorizontalAlignment="Left" VerticalAlignment="Center">
             <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
-            <Label Content="Возобновить 3-й поток." Margin="5,5,5,5" />
+            <Label Content="Приостановить 3-й поток." Margin="5,5,5,5" />
         </StackPanel>
 
     </Grid>
