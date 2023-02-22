@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Танцующие прогресс-бары" Height="450" Width="450">
+        Title="Танцующие прогресс-бары" Height="450" Width="450" Closed="Window_Closed" ResizeMode="NoResize">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -22,7 +22,8 @@
         </Grid.ColumnDefinitions>
 
         <!--1-й ProgressBar-->
-        <ProgressBar x:Name="ProgressBar1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"
+        <ProgressBar x:Name="ProgressBar1" Grid.Column="0" Grid.ColumnSpan="2"
+                     HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
                      Value="0" Margin="5" />
 
@@ -49,14 +50,17 @@
 
         <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="5,5,5,5"
                     HorizontalAlignment="Left" VerticalAlignment="Center">
-            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
-            <Label Content="Запустить 2-й поток." Margin="5,5,5,5" />
+            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5"
+                      Checked="StartCheckBox2_Checked" Unchecked="StartCheckBox2_Unchecked" />
+            <Label x:Name="StartLabel2" Content="Запустить 2-й поток." Margin="5,5,5,5" />
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5" IsEnabled="False"
+        <StackPanel x:Name="StackPanelStop2" Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5"
+                    IsEnabled="False"
                     HorizontalAlignment="Left" VerticalAlignment="Center">
-            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
-            <Label Content="Приостановить 2-й поток." Margin="5,5,5,5" />
+            <CheckBox x:Name="CheckBoxStop2" VerticalAlignment="Center" Margin="5,5,5,5"
+                      Checked="CheckBoxStop2_Checked" Unchecked="CheckBoxStop2_Unchecked" />
+            <Label x:Name="LabelStop2" Content="Приостановить 2-й поток." Margin="5,5,5,5" />
         </StackPanel>
 
         <!--3-й ProgressBar-->
@@ -67,14 +71,17 @@
 
         <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Margin="5,5,5,5"
                     HorizontalAlignment="Left" VerticalAlignment="Center">
-            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
-            <Label Content="Запустить 3-й поток." Margin="5,5,5,5" />
+            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5"
+                      Checked="StartCheckBox3_Checked" Unchecked="StartCheckBox3_Unchecked" />
+            <Label x:Name="StartLabel3" Content="Запустить 3-й поток." Margin="5,5,5,5" />
         </StackPanel>
 
-        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5" IsEnabled="False"
+        <StackPanel x:Name="StackPanelStop3" Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5"
+                    IsEnabled="False"
                     HorizontalAlignment="Left" VerticalAlignment="Center">
-            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
-            <Label Content="Приостановить 3-й поток." Margin="5,5,5,5" />
+            <CheckBox x:Name="CheckBoxStop3" VerticalAlignment="Center" Margin="5,5,5,5"
+                      Checked="CheckBoxStop3_Checked" Unchecked="CheckBoxStop3_Unchecked" />
+            <Label x:Name="LabelStop3" Content="Приостановить 3-й поток." Margin="5,5,5,5" />
         </StackPanel>
 
     </Grid>
