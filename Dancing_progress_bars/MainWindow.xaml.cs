@@ -6,9 +6,10 @@ namespace Dancing_progress_bars;
 
 public partial class MainWindow : Window
 {
-    ManualResetEvent event_for_suspend = new ManualResetEvent(true);
+    private readonly ManualResetEvent event_for_stop = new(false);
+    private readonly ManualResetEvent event_for_suspend = new(true);
 
-    private SynchronizationContext UiContext;
+    private readonly SynchronizationContext UiContext;
 
     public MainWindow()
     {
@@ -31,7 +32,7 @@ public partial class MainWindow : Window
 
             while (true)
             {
-                event_for_suspend.WaitOne();
+                event_for_suspend.WaitOne(); // Если сигналит усыпляет.
                 Thread.Sleep(250);
                 UiContext.Send(d => ProgressBar1.Value = GetRandomValue(), null);
             }
@@ -51,6 +52,7 @@ public partial class MainWindow : Window
 
 
     #region 1 поток (1 слайдер)
+
     // Пуск 1 фонового потока для 1 слайдера.
     private void StartCheckBox1_Checked(object sender, RoutedEventArgs e)
     {
@@ -68,9 +70,7 @@ public partial class MainWindow : Window
         UiContext.Send(d => StartLabel1.Content = "Запустить 1-й поток", null);
         UiContext.Send(d => StackPanelStop1.IsEnabled = false, null);
         UiContext.Send(d => CheckBoxStop1.IsChecked = false, null);
-        // Как тут остановить поток ?
-
-
+        
     }
 
     private void CheckBoxStop1_Checked(object sender, RoutedEventArgs e)
@@ -84,6 +84,7 @@ public partial class MainWindow : Window
         UiContext.Send(d => LabelStop1.Content = "Приостановить 1-й поток", null);
         event_for_suspend.Set();
     }
+
     #endregion
 
 
@@ -95,8 +96,6 @@ public partial class MainWindow : Window
     #region 3 поток (3 слайдер)
 
     #endregion
-
-
 }
 
 // Запустить 3 фоновых потока.
