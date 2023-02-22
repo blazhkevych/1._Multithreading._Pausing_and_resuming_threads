@@ -3,10 +3,73 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Dancing_progress_bars"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Танцующие прогресс-бары" Height="450" Width="450">
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--1-й ProgressBar-->
+        <ProgressBar Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                     Value="75" Margin="5" />
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="5,5,5,5"
+                    HorizontalAlignment="Left" VerticalAlignment="Center">
+            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
+            <Label Content="Остановить 1-й поток." Margin="5,5,5,5" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5"
+                    HorizontalAlignment="Left" VerticalAlignment="Center">
+            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
+            <Label Content="Возобновить 1-й поток." Margin="5,5,5,5" />
+        </StackPanel>
+
+        <!--2-й ProgressBar-->
+        <ProgressBar Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     Value="75" Margin="5" />
+
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="5,5,5,5"
+                    HorizontalAlignment="Left" VerticalAlignment="Center">
+            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
+            <Label Content="Остановить 2-й поток." Margin="5,5,5,5" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5"
+                    HorizontalAlignment="Left" VerticalAlignment="Center">
+            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
+            <Label Content="Возобновить 2-й поток." Margin="5,5,5,5" />
+        </StackPanel>
+
+        <!--3-й ProgressBar-->
+        <ProgressBar Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Stretch"
+                     VerticalAlignment="Stretch"
+                     Value="75" Margin="5" />
+
+        <StackPanel Grid.Row="5" Grid.Column="0" Orientation="Horizontal" Margin="5,5,5,5"
+                    HorizontalAlignment="Left" VerticalAlignment="Center">
+            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
+            <Label Content="Остановить 3-й поток." Margin="5,5,5,5" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5,5,5,5"
+                    HorizontalAlignment="Left" VerticalAlignment="Center">
+            <CheckBox VerticalAlignment="Center" Margin="5,5,5,5" />
+            <Label Content="Возобновить 3-й поток." Margin="5,5,5,5" />
+        </StackPanel>
 
     </Grid>
 </Window>
