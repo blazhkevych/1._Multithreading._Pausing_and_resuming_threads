@@ -6,7 +6,9 @@ namespace Dancing_progress_bars;
 
 public partial class MainWindow : Window
 {
-    public SynchronizationContext UiContext;
+    ManualResetEvent event_for_suspend = new ManualResetEvent(true);
+
+    private SynchronizationContext UiContext;
 
     public MainWindow()
     {
@@ -19,52 +21,20 @@ public partial class MainWindow : Window
         UiContext = SynchronizationContext.Current;
     }
 
-    // Метод, 
-    private void StartCheckBox_Click1(object sender, RoutedEventArgs e)
-    {
-        // Создание делегата функции, в которой будет работать новый поток.
-        ThreadStart methodThread = ThreadFunk;
-        // Создание объекта потока.
-        var thread = new Thread(methodThread);
-        thread.IsBackground = true;
-        // Старт потока.
-        thread.Start();
-    }
-
     private void ThreadFunk()
     {
         try
         {
-            Application.Current.Dispatcher.Invoke(() => ProgressBar1.Minimum = 0);
-            Application.Current.Dispatcher.Invoke(() => ProgressBar1.Maximum = 100);
-            Application.Current.Dispatcher.Invoke(() => ProgressBar1.Value = 0);
+            UiContext.Send(d => ProgressBar1.Minimum = 0, null);
+            UiContext.Send(d => ProgressBar1.Maximum = 100, null);
+            UiContext.Send(d => ProgressBar1.Value = 0, null);
 
-            while (StartCheckBox1.IsChecked == true && CheckBoxStop1.IsChecked == false)
+            while (true)
             {
-                // Получаем случайное значение.
-                var randomValue = GetRandomValue();
-                // Обновляем значение ProgressBar1.Value с задержкой в 50 мс.
-                UiContext.Send(d => ProgressBar1.Value = randomValue, null);
-                Thread.Sleep(50);
+                event_for_suspend.WaitOne();
+                Thread.Sleep(250);
+                UiContext.Send(d => ProgressBar1.Value = GetRandomValue(), null);
             }
-
-            UiContext.Send(d =>
-            {
-                // Проверяем состояние чекбокса.
-                if (StartCheckBox1.IsChecked == true)
-                {
-                    StartLabel1.Content = "Остановить 1-й поток";
-                    StackPanelStop1.IsEnabled = true;
-                }
-                else
-                {
-                    StartLabel1.Content = "Запустить 1-й поток";
-                    CheckBoxStop1.IsChecked = false;
-                    LabelStop1.Content = "Приостановить 1-й поток";
-                    ProgressBar1.Value = 0;
-                    StackPanelStop1.IsEnabled = false;
-                }
-            }, null);
         }
         catch (Exception e)
         {
@@ -78,4 +48,56 @@ public partial class MainWindow : Window
         var random = new Random();
         return random.Next(0, 101);
     }
+
+
+    #region 1 поток (1 слайдер)
+    // Пуск 1 фонового потока для 1 слайдера.
+    private void StartCheckBox1_Checked(object sender, RoutedEventArgs e)
+    {
+        // Создаем и запускаем поток.
+        var th1 = new Thread(ThreadFunk);
+        th1.Name = "Thread1";
+        th1.IsBackground = true;
+        th1.Start();
+        UiContext.Send(d => StartLabel1.Content = "Остановить 1-й поток", null);
+        UiContext.Send(d => StackPanelStop1.IsEnabled = true, null);
+    }
+
+    private void StartCheckBox1_Unchecked(object sender, RoutedEventArgs e)
+    {
+        UiContext.Send(d => StartLabel1.Content = "Запустить 1-й поток", null);
+        UiContext.Send(d => StackPanelStop1.IsEnabled = false, null);
+        UiContext.Send(d => CheckBoxStop1.IsChecked = false, null);
+        // Как тут остановить поток ?
+
+
+    }
+
+    private void CheckBoxStop1_Checked(object sender, RoutedEventArgs e)
+    {
+        UiContext.Send(d => LabelStop1.Content = "Возобновить 1-й поток", null);
+        event_for_suspend.Reset();
+    }
+
+    private void CheckBoxStop1_Unchecked(object sender, RoutedEventArgs e)
+    {
+        UiContext.Send(d => LabelStop1.Content = "Приостановить 1-й поток", null);
+        event_for_suspend.Set();
+    }
+    #endregion
+
+
+    #region 2 поток (2 слайдер)
+
+    #endregion
+
+
+    #region 3 поток (3 слайдер)
+
+    #endregion
+
+
 }
+
+// Запустить 3 фоновых потока.
+// 20:24:35 событие с ручным сбросом
